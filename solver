@@ -1,0 +1,54 @@
+from tkinter import*
+import math
+from math import *
+t=Tk()
+t.title("SOLVER")
+t.geometry('400x550')
+e1=Entry(t)
+e1.place(x=100,y=50)
+
+def variable():
+    global e1,a, v, labels
+    a_= e1.get()
+    a = a_
+    notv = ['(',')',"'",'"','-','+','/','*','=','.',',']+list("1234567890")
+    for i in dir(math)+notv:
+        a_=a_.replace(i,' ')
+
+    
+    v=a_.split()
+    
+    o=len(v)
+    l=50
+    c=100
+    g=100
+    r=0
+    labels=[]
+    for i in v:
+        
+        l1=Label(t,text=i,fg="blue")
+        l1.place(x=l,y=c)
+        i=Entry(t)
+        i.place(x=g,y=c)
+        
+        labels.append(i)
+        r=r+1
+        c=c+100
+
+
+def calculate():
+    global a,v,labels
+    for i,j in zip(labels,v):
+        a=a.replace(j,i.get())
+        
+
+
+    b1=eval(a)
+    b=Label(t,text=b1,bg="yellow")
+    b.place(x=200,y=500)
+b1=Button(t,text="variable",command=variable,fg="red",width=8)
+
+b2=Button(t,text="calculate",command=calculate,fg="red",width=8)
+b1.place(x=10,y=50)
+b2.place(x=75,y=500)
+t.mainloop()
